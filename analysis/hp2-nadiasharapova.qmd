@@ -1,5 +1,5 @@
 ---
-title: "hp2-nadiasharapova"
+title: "HP2"
 author: "Nadia Sharapova"
 format: 
   html:
@@ -11,7 +11,14 @@ editor_options:
 
 ## Introduction
 
-This data, titled "Psychosocial Dimensions of Student Life," includes the survey resutls from 100 computer science students surrounding their lifestyles and mental health. This analysis uses data surrounding their lifestyle and social life to determine any correlations between mental health and self-care behaviors through data analysis.
+This data, titled "Psychosocial Dimensions of Student Life," includes the survey resutls from 100 computer science students surrounding their lifestyles and mental health. This analysis uses data surrounding their lifestyle and social life to determine any correlations between mental health and self-care behaviors through data analysis. I was specifical
+
+Questions
+
+1.  How do men and women perceive their academic performance in computer science?
+2.  Does depression decrease in those with more friends?
+3.  
+4.  
 
 ## Setup
 
@@ -116,32 +123,13 @@ d <- na.omit(d)
 
 ```
 
-## Are there differences in the impacts of depression on academic performance between genders?
+## How do men and women perceive their academic performance in computer science?
 
 One of the most interesting aspects of this dataset is seeing how gender impacts perceived performance in computer science. I first subset by data and after counting how they perceived their performance by gender, I noticed that women were the only ones who perceived their performance as 'below average' while men were the only ones who perceived their performance as 'excellent.'
 
 ```{r}
-f_performance <- d %>% 
-  filter(Gender == "Female")
-m_performance <- d %>% 
-  filter(Gender == "Male")
-
 d %>% 
   count(Gender, sort=TRUE)
-
-f_performance %>% 
-  count(Performance, sort=TRUE)
-
-f_performance %>% 
-  count(Notes, sort=TRUE)
-
-m_performance %>% 
-  count(Notes, sort=TRUE)
-
-
-m_performance %>% 
-  count(Performance, sort=TRUE)
-
 
 
 ggplot(d, aes(Performance))+
@@ -158,13 +146,14 @@ ggplot(d, aes(Performance))+
 To understand how to better alleviate student depression, I wanted to evaluate how the number of friendships impacted the reported levels of depression. I opted to subset the data into two dataframes for those with more than the median number of friends (6) and those with less than the median number of friends. In the figure below, we see that those with more than 6 friends had a significantly proportion of people reporting depression only sometimes or not at all. Those with less than 6 friends reported more consistent depression and were less likely to have depression only sometimes. However, both groups had a higher percentage of people who had depression at least sometimes than not at all. This data demonstrates that friendship likely has an impact on reducing depression levels.
 
 ```{r}
+#isolated data surrounding friendship for analysis
 df_friends <- data.frame(d[c("Age", "Gender", "Friends", "participant_id")])
 
-median_number_of_friends <- df_friends %>% 
-  summarize(median = median(Friends, na.rm = TRUE))
 
-print(median_number_of_friends)
+print(df_friends %>% 
+  summarize(median = median(Friends, na.rm = TRUE)))
 
+#created new dataframes containing data surrounding those with friendships above and below median number of friends
 df_social<- df_friends %>% 
   filter(df_friends$Friends>6)
 
@@ -174,7 +163,7 @@ df_join_social <- df_social %>%
 df_unsocial <-d %>% 
   anti_join(df_join_social, join_by(participant_id))
 
-
+#summarized data surrounding depression levels for the two groups
 summ_social <-df_join_social %>% 
   count(Depression, sort= TRUE)
 
@@ -183,10 +172,10 @@ summ_unsocial<- df_unsocial %>%
   count(Depression, sort=TRUE)
 
 
+#set plotting area into 1*2 array to graph pie charts together for comparison
 labels1 <- c("No", "Sometimes", "Yes")
 labels2 <- c("Yes", "Sometimes", "No")
 
-#set plotting area into 1*2 array
 par(mfrow=c(1,2))
 
 
