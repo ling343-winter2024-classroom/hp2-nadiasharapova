@@ -3,5 +3,3 @@ title: "Homepage: HP2"
 author: "Nadia Sharapova"
 format: html
 ---
-
-[hp2-nadiasharapova.qmd]
