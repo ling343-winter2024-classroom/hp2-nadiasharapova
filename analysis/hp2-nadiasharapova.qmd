@@ -11,7 +11,7 @@ editor_options:
 
 ## Introduction
 
-This data, titled "Psychosocial Dimensions of Student Life," includes the survey resutls from 100 computer science students surrounding their lifestyles and mental health. This analysis uses data surrounding their lifestyle and social life to determine any correlations between mental health and self-care behaviors through data analysis. I was specifical
+This data, titled "Psychosocial Dimensions of Student Life," includes the survey resutls from 100 computer science students surrounding their lifestyles and mental health. This analysis uses data surrounding their lifestyle and social life to determine any correlations between mental health and self-care behaviors through data analysis. I was specifically interested in understanding how different elements of student life impacted perceived performance and depression levels. This analysis can be used to explore how to improve student health in STEM heavy fields and recognize the barriers to performance introduced by gender, depression, stress/sleep, and age.
 
 Core Questions
 
@@ -278,3 +278,7 @@ one.way <- aov(Sleep ~ Depression, data= d_numeric)
 
 summary(one.way)
 ```
+
+## Conclusions
+
+My analysis of the dataset "Psychosocial Dimensions of Student Life," reveals several key insights into how students are impacted by social barriers and mental health. In Computer Science, a STEM heavy field, we can see that students who face mental health struggles, older students, and women struggle with their perceptions of their performance. My data also shows that sleep and friendships have a significant impact on depression levels. This data implies that investing into services that include gender-based disparities and work to include older students is necessary. My data also supports the idea of investing further into helping students with mental struggles create healthier habits like sleep and friendships to address mental health struggles.
